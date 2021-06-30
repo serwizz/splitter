@@ -94,7 +94,7 @@ class AlbumSplitter:
         """
         cuetag.sh *.cue *.flac
         """
-        self._run_cmd(['cuetag.sh', self._get_cue_file(), self._all('*.flac')])
+        self._run_cmd(['cuetag.sh', self._get_cue_file()] + self._all('*.flac'))
 
     def _sanitize_filenames(self):
         """
