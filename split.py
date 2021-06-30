@@ -155,19 +155,11 @@ class Split:
 
     def run(self):
         current_dir = self.cur_dir()
-        tmp_dir = f'{current_dir}_tmp'
-
-        shutil.rmtree(tmp_dir, ignore_errors=True)
-
-        print('COPY', current_dir, 'TO', tmp_dir)
-        copy_tree(current_dir, tmp_dir)
-
-        current_dir = tmp_dir
-
         self._process_folder(current_dir)
 
     def _process_folder(self, folder):
         subfolders = [f.path for f in os.scandir(folder) if f.is_dir()]
+        subfolders.sort()
         for subfolder in subfolders:
             album_splitter = AlbumSplitter(album=pathlib.Path(folder, subfolder))
             album_splitter.split()
