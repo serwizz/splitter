@@ -3,9 +3,7 @@
 import glob
 import os
 import pathlib
-import re
 import shutil
-from distutils.dir_util import copy_tree
 from subprocess import call
 
 
@@ -21,8 +19,6 @@ class AlbumSplitter:
         if not self._get_cue_file():
             return
 
-        # self._rename_album()
-        # self._split_album()
         self._prepare_cue()
         self._convert_to_flac()
         self._split_flac()
@@ -30,25 +26,6 @@ class AlbumSplitter:
         self._set_tags()
         self._sanitize_filenames()
         self._remove_trash()
-
-    def _rename_album(self):
-        pass
-        # common_patterns = {
-        #     re.compile('(\\d+).*(\\w+).*(/[\\w+/])'): '$1 - $2',
-        #     re.compile('(\\d+).*(\\w+)'): '$1 - $2',
-        #     re.compile('(\\w+).*(\\d+)'): '$2 - $1',
-        #     re.compile('(\\w+).*(\\d+).*(/[\\w+/])'): '$2 - $1',
-        # }
-        # album_name = pathlib.Path(self.album).stem
-        # print('album_name', album_name)
-        # for pattern in common_patterns:
-        #     print('SEARCH', pattern, re.search(pattern, album_name))
-
-    def _split_album(self):
-        cue_files = self._all('*.cue')
-        flac_files = self._all('*.flac')
-        if len(cue_files) > 1 or len(flac_files) > 1:
-            raise
 
     def _prepare_cue(self):
         """
