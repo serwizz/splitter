@@ -119,7 +119,9 @@ class AlbumSplitter:
         return files[0] if files else None
 
     def _all(self, wildcard):
-        return glob.glob(f'{self.album}/{wildcard}')
+        items = glob.glob(f'{self.album}/{wildcard}')
+        items.sort()
+        return items
 
     def _run_cmd(self, cmd):
         cmd = list(map(str, cmd))
