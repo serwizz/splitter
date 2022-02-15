@@ -48,7 +48,7 @@ class AlbumSplitter:
         """
         wav = self._first('*.wav') or self._first('*.wv')
         if wav:
-            self._run_cmd(['sox', wav, 'file.flac'])
+            self._run_cmd(['sox', '-S', wav, 'file.flac'])
         ape = self._first('*.ape')
         if ape:
             self._run_cmd(['shntool', 'conv', '-o', 'flac', ape])
@@ -100,7 +100,7 @@ class AlbumSplitter:
             for file in self._all(wildcard=wildcard):
                 os.remove(file)
 
-        folders_to_remove = ('Scans', 'Covers')
+        folders_to_remove = ('Scans', 'Covers', 'scans', 'covers', 'Artwork', 'artwork')
         for folder in folders_to_remove:
             shutil.rmtree(pathlib.Path(self.album, folder), ignore_errors=True)
 
