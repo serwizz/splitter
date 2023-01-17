@@ -32,6 +32,7 @@ class AlbumSplitter:
         sed -i '1s/^\xEF\xBB\xBF//' *.cue
         """
         cue_file = self._get_cue_file()
+        print('cue_file', cue_file)
 
         path = pathlib.Path(cue_file)
         text = path.read_text()
@@ -119,7 +120,7 @@ class AlbumSplitter:
         return files[0] if files else None
 
     def _all(self, wildcard):
-        items = glob.glob(f'{self.album}/{wildcard}')
+        items = glob.glob(f'{glob.escape(self.album)}/{wildcard}')
         items.sort()
         return items
 
